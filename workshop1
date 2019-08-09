@@ -1,0 +1,32 @@
+program start
+  implicit none
+  real :: x(1000),f,g,epsilon
+  integer :: i,n
+
+
+
+  print*,'select starting point'
+
+  read*,x(1)
+
+  !print*,'select convergence tolerance, epsilon'
+  !read*,epsilon
+  epsilon=1e-5
+  i=1
+  do while(abs(x(i)-x(i-1))>epsilon)
+  !do while(abs(f)>epsilon)
+    f=cos(x(i))-x(i)
+    !g=-sin(x(i))-1
+
+    !x(i+1)=x(i)-(f/g)
+    x(i+1)=x(i)-((cos(x(i))-x(i))/(-sin(x(i))-1))
+    i=i+1
+    !if (abs(x(i)-x(i-1))<epsilon) exit myloop
+    !if (abs(f)<epsilon) exit myloop
+    print*,('step no(i):'),i
+    print*,('x(i)'),x(i)
+    print*,('f(x(i)):'),(f)
+
+  enddo
+
+end program
