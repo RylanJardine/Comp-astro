@@ -1,0 +1,16 @@
+In this workshop the aim is to numerically solve the heat equation, we can do this by
+first defining our parameters to be length, L=1m, change in position dx=0.05m,
+change in timestep dt=27.4 seconds and for our initial stable solution. This solution
+applies to a steel rod which is perfectly insulated except at the two ends. We solve the problem
+by iterating by over both the space and time indices. The module which solves this code
+is heat.f90 which is called in a program heat2.f90. The code also writes the parameters
+position, temperature and time into an output file 'results.dat'. These files can be
+plotted using the file 'plot.py' using the 'python plot.py' command in the terminal.
+Hardwired into the code is the value of the dimensionless parameter 'alpha=0.25', this
+can be changed to allow for different solutions to the code for varying time steps and
+postition step lengths. However, if this is the case the exact solution in the plotting file
+will also need to be modified.
+
+
+The code can be run by using the makefile and simply typing 'make' in the terminal
+to compile and is run using the command './heat'.
