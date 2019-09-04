@@ -9,16 +9,16 @@
       !Pass into module a real variable
       real(8), intent(in) :: tol
       !Pass out of module a real variable
-      real(8), intent(out) :: theta1,x,t
+      real(8), intent(out) :: theta1
       !Define real variables
-      real(8) :: theta21,theta2
+      real(8) :: theta21,theta2,x,t
       !Define integer
       integer :: i
 
       !Print statement
 
       !Set initial x1
-      theta2=1.
+      theta2=-1.
       !Initiialise i value
       i=1
       !Set initial difference
@@ -31,7 +31,7 @@
       !Do loop, to stop when condition no longer satisifed
     do while(theta21>tol)
       !Iterate over i
-      i=i+1
+    !  i=i+1
       !Define iteration of x-position
       !theta1=theta2-(cos(theta2)-(x-theta2)/t)/(-sin(theta2)+1/t)
       theta1=theta2-(cos(theta2)-(x-theta2)/t)/(-sin(theta2)+1/t)
