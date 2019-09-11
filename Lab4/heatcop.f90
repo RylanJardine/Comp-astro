@@ -16,7 +16,7 @@ contains
     !Length of rod (in metres)
     L=1
     !change in position in metres
-    dx=0.01
+    dx=0.005
     !Timestep(seconds)
     dt=0.005
     !alpha=dimensionless parameter, with alpha<0.5 for a stable solution
@@ -26,7 +26,7 @@ contains
     !open file
     open(1,file='results.dat', status='replace',action='write')
 
-   !Do loop to set initial conditions for all position gridpoints
+!   Do loop to set initial conditions for all position gridpoints
     do j=1,n_grid+1
 
       !Initial condition:
@@ -44,11 +44,11 @@ contains
 
     !Do loop to iterate over all time steps
     do n=1,280
-        !x=-pi/2
+        x=-pi/2
       write(1,*) -pi/2, v(1,n+1), n*dt
       print*,-pi/2, v(1,n+1), n*dt
-      do j=2,628
-        !x=x+dx
+      do j=2,n_grid+1
+        x=x+dx
         v(j,n+1)=v(j,n)-0.25*dt/dx*((v(j+1,n)**2)-v(j-1,n)**2)
         !v(j,n)=v(j,n-1)-0.25*(dt/dx)*((v(j+1,n-1))**2-(v(j-1,n-1))**2)
         write(1,*) -pi/2+dx*(j-1), v(j,n+1),n*dt

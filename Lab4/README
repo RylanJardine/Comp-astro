@@ -1,0 +1,24 @@
+Our code serves to solve Burger's equation both numerically and analytically
+for the case where our initial conditions are v(x,0)=cos(x) and over a domain
+of -pi/2+epsilon<x<pi/2+epsilon, for an epsilon=0.01. Our code analytically
+solves burger's equation for the function v=cos(x-vt) using theta=x-vt by
+first calculating values of theta using the Newton-Raphson method in the subroutine
+bg in file burgery.f90. Then by iterating this solution over all grid points in our domain and
+solving for v in our subroutine bourg in file burginator.f90. Where we are set 100 x-values over our
+domain and time steps of 0.2, iterating until t=1.4. Finally this subroutine is
+called in the main program burgersolves.
+
+The numerical solution is obtained using a finite difference method of burgers
+equation iterated over the given domain and until t=1.4 seconds for a specified
+number of gridpoints and timesteps which can be changed manually in the program
+burgersolves. The subroutine responsible for this burg_solver, in file new2.f90
+ is then called in the program file, new2.f90. The compiling order is given as
+ burgery.f90 burginator.f90 new2.f90 new.f90 as detailed in the makefile. The code
+ can thus be compiled by typing make into the terminal and run by using the command
+ ./burgsnum. The code produces 3 output files used for plotting 'results.dat' corresponds
+ to the numerical solution data, as does 'steps.dat' which is simply used to keep
+ track of the number of timesteps and position step lengths plotted for. 'results2.dat'
+ corresponds to the results of the analytical solution data. These can all be plotted
+using the plotting routine ploty2.py called using 'python ploty2.py'. The plotting
+routine takes care to plot only selective timesteps using a series of for loops,
+the exact range of these can be altered in the file itself.

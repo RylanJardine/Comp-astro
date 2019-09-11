@@ -1,7 +1,7 @@
 
 FC=gfortran
 FFLAGS=-O3 -Wall -Wextra
-SRC=heatcop.f90 heat2cop.f90
+SRC=burgery.f90 burginator.f90 new2.f90 new.f90
 OBJ=${SRC:.f90=.o}
 
 

@@ -12,39 +12,22 @@
       real(8), intent(out) :: theta1
       !Define real variables
       real(8) :: theta21,theta2,x,t
-      !Define integer
-      integer :: i
 
-      !Print statement
-
-      !Set initial x1
+      !set initial guess for theta2
       theta2=-1.
-      !Initiialise i value
-      i=1
+
       !Set initial difference
       theta21=abs(theta2-theta1)
 
-      !x=1
-      !t=0.2
 
-
-      !Do loop, to stop when condition no longer satisifed
+      !do while loop to iterate until condition theta21<tol is reached
     do while(theta21>tol)
-      !Iterate over i
-    !  i=i+1
-      !Define iteration of x-position
-      !theta1=theta2-(cos(theta2)-(x-theta2)/t)/(-sin(theta2)+1/t)
-      theta1=theta2-(cos(theta2)-(x-theta2)/t)/(-sin(theta2)+1/t)
-      !Define difference criteria
-      theta21=abs(theta2-theta1)
 
-    !print statement of ith step
-    !  print*,('step no(i):'),i-1
-    !print statement of ith x-position
-    !  print*,('x(i):'),theta1
-    !print statement of error
-    !  print*,('error:'),theta21
-      !Redefine variable for further iteration
+      !Find theta1
+      theta1=theta2-(cos(theta2)-(x-theta2)/t)/(-sin(theta2)+1/t)
+      !define error
+      theta21=abs(theta2-theta1)
+      !set theta2=theta1
       theta2=theta1
 
     !End do loop

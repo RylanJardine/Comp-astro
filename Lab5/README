@@ -1,0 +1,16 @@
+This code numerically solves the 1D advection equation
+using both an FTCS scheme and Lax method. It is currently
+set for v=1 over the domain of x from 0 to 1 with nx=100
+grid points. With timesteps of dt=0.5dx/v, plotted from
+t=0 to t=1. With initial conditions of u=1 for 0.25<x<=0.75
+and u=0 otherwise. However, all of these parameters can be changed
+in the code to evaluate over more timesteps or change v etc.
+At each timestep, the code outputs a snap file containg x and
+u for both FTCS and lax methods.
+
+The code itself can be compiled by typing make into the
+terminal and then run using the command ./ftcs to run the code.
+Finally the results can be plotted for selected timesteps
+(which can be changed in the plotting routine 'plotter2.py')
+by typing python plotter2.py into the terminal. This will
+produce plots for both the FTCS and lax methods.
