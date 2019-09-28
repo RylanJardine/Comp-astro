@@ -1,0 +1,22 @@
+This code numerically solves the 1D advection equation
+using an FTCS scheme, Lax method as well as the upwind scheme and lax-wendroff method.
+The code can be compiled usin the make file provided by typing make. The code can
+then be run by simply using ./solve. The code is currently set for v=1
+over the domain of x from 0 to 1 with nx=100 grid points. Timesteps of
+dt=(c*dx)/v are used, where the value of the courant
+condition c can be selected from the terminal and read into the program (note 0.5
+should be the default input such that dt=(0.5*dx)/v).
+The initial conditions are u=1 for 0.25<x<=0.75
+and u=0 otherwise or sin(2*pi*x). The exact form of the initial condition can be
+selected in the terminal. However, all of these parameters can be changed
+in the code to evaluate over more timesteps or change v etc.
+Furthermore each of the 4 solving methods is avaialaible to be selected in the
+termial via prompting to choose a number from 1 to 4.
+
+The resulting ouptut files
+can simply be plotted using splash from the command 'splash snap_*'. Or conversely
+using my python plotting routine 'plotter2.py', however it is worth noting that the last
+snap file written may need to be manually selected for plotting using python. In order
+to produce multiple plots on the same plot, one needs to run the code, renaming the
+last snap file to save it and then run the code a second time for the next routine and finally plot
+the two results on top of each other. 

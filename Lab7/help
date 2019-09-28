@@ -1,0 +1,13 @@
+start at index 0 'ghost zone' boundary of grid has index 1/2 run from 0 to nx for cell interface
+implicit that they are always offset by 1/2, in
+
+
+real:: ustar(0:nx)
+
+do i=0,nx
+  ustar(i)=0.5*(uold(i+1)+uold(i))+dt/(2dx)*(uold(i)-uold(i+1))
+enddo
+
+do i=1,nx
+  u(i)=uold(i)+dt/dx(ustar(i-1)-ustar(i))
+enddo
