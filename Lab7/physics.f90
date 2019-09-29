@@ -34,13 +34,13 @@ contains
 
   end subroutine
 
-  subroutine get_time_step(dtnew,lambdamax,dx,nx)
-    integer,intent(in) :: nx
+  subroutine get_time_step(dtnew,lambdamax,dx,nx,nu)
+    integer,intent(in) :: nx,nu
     real,intent(in) :: dx,lambdamax(0:nx+1)
     real,intent(out) :: dtnew
-    real:: endlambda
+    real:: endlambda,u(nu,0:nx+1),prim(nu,0:nx+1)
 
-    ! call cons2prim(nu,u,nx,prim)
+    call cons2prim(nu,u,nx,prim)
     endlambda=maxval(lambdamax(0:nx+1))
     dtnew=dx/endlambda
 

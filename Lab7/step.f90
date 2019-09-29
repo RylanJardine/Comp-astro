@@ -1,6 +1,8 @@
 !Begin module
 module solve
 use flux
+use flux_god
+! use flux_god
   implicit none
 
 ! begin Subroutine ftcs
@@ -100,14 +102,14 @@ contains
 
   end subroutine
 
-  subroutine finitevolume(nx,u_old,u,nu,dt,dx,dtnew)
+  subroutine finitevolume(nx,u_old,u,nu,dt,dx,dtnew,k)
 
     !Define integers, parameters reals
 
 
 !begin subroutine for sine function
     !set variable types, pull in and o::nx,nu
-    integer ::i
+    integer ::i,k
     !set arrays of size 0 to nx+1, to allow for two buffer zones
     real,intent(in) ::u_old(nu,0:nx+1),dx,dt
     real,intent(out) ::u(nu,0:nx+1)
@@ -115,6 +117,31 @@ contains
     integer,intent(in) ::nx,nu
 
     !iterate first over the half integer steps
+
+!second do loop for trial run
+if (k==1) then
+    do i=0,nx+1
+      ul(nu)=u_old(nu,i)
+      ur(nu)=u_old(nu,i+1)
+      !condition to solve\
+      call get_fluxgod(nu,ul,ur,f,lambdar)
+      fr(nu)=f(nu)
+
+      ul(nu)=u_old(nu,i-1)
+      ur(nu)=u_old(nu,i)
+      call get_fluxgod(nu,ul,ur,f,lambdal)
+      fl(nu)=f(nu)
+      lambdamax(i)=max(abs(lambdal),abs(lambdar))
+
+      u(nu,i)=u_old(nu,i)-(dt/dx)*(fr(nu)-fl(nu))
+    enddo
+    call get_time_step(dtnew,lambdamax,dx,nx,nu)
+
+    !set buffer zones
+    u(nu,0)=u(nu,nx)
+    u(nu,nx+1)=u(nu,1)
+
+  else if (k==2) then
 
     do i=0,nx+1
       ul(nu)=u_old(nu,i)
@@ -131,14 +158,14 @@ contains
 
       u(nu,i)=u_old(nu,i)-(dt/dx)*(fr(nu)-fl(nu))
     enddo
-    call get_time_step(dtnew,lambdamax,dx,nx)
+    call get_time_step(dtnew,lambdamax,dx,nx,nu)
 
     !set buffer zones
     u(nu,0)=u(nu,nx)
     u(nu,nx+1)=u(nu,1)
+  end if
 
   end subroutine
-
 
 
 

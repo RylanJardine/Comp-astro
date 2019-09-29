@@ -26,15 +26,20 @@ contains
           !otherwise other initial condition
           else
             prim(nu,i)=1
+        call prim2cons(nu,u(nu,i),nx,prim(nu,i))
           endif
 
 
         enddo
         !set buffer zones
         prim(nu,0)=prim(nu,nx)
+
+        call prim2cons(nu,u(nu,0),nx,prim(nu,0))
+
         prim(nu,nx+1)=prim(nu,1)
 
-        call prim2cons(nu,u,nx,prim)
+        call prim2cons(nu,u(nu,nx+1),nx,prim(nu,nx+1))
+
 
 
   end subroutine
@@ -52,12 +57,17 @@ contains
         !do loop to iterate over initial condition for all x
         do i=1,nx
           prim(nu,i)=sin(2*pi*x(i))
+          call prim2cons(nu,u(nu,i),nx,prim(nu,i))
+
         enddo
         !set buffer zones
-        prim(nu,0)=u(nu,nx)
-        prim(nu,nx+1)=u(nu,1)
+        prim(nu,0)=prim(nu,nx)
 
-        call prim2cons(nu,u,nx,prim)
+        call prim2cons(nu,u(nu,0),nx,prim(nu,0))
+
+        prim(nu,nx+1)=prim(nu,1)
+
+        call prim2cons(nu,u(nu,nx+1),nx,prim(nu,nx+1))
 
   end subroutine
 
